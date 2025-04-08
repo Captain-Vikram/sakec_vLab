@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 const postQuestionsMap: Record<string, any> = {
   "1": {
@@ -244,10 +244,10 @@ const postQuestionsMap: Record<string, any> = {
 };
 
 export async function GET(
-  request: NextRequest, 
-  { params }: { params: Record<string, string> }
+  request: NextRequest,
+  context: { params: { id: string } }
 ) {
-  const id = params.id;
+  const id = context.params.id;
   const experiment = postQuestionsMap[id];
 
   if (!experiment) {

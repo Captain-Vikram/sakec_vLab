@@ -244,10 +244,10 @@ const questionsMap: Record<string, any> = {
 };
 
 export async function GET(
-  request: NextRequest, 
-  { params }: { params: Record<string, string> }
+  request: NextRequest,
+  context: { params: { id: string } }
 ) {
-  const id = params.id;
+  const id = context.params.id;
   const experiment = questionsMap[id];
 
   if (!experiment) {
