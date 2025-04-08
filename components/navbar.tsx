@@ -15,6 +15,9 @@ export function Navbar() {
     { name: "About", path: "/about" },
     { name: "Experiments", path: "/experiments" },
     { name: "Contact", path: "/contact" },
+    { name: "Team", path: "/team" },
+    { name: "Login", path: "/login" },
+    { name: "Register", path: "/register" }
   ]
 
   return (

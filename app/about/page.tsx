@@ -1,7 +1,9 @@
-"use client"
-import { BookOpen, FlaskRoundIcon as Flask, GraduationCap, Users } from "lucide-react"
-import { motion } from "framer-motion"
-import React, { useEffect, useState, useRef } from 'react';
+"use client";
+
+import { useEffect, useState, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { BookOpen, FlaskConical, GraduationCap, Users, ArrowRight } from 'lucide-react';
+import Link from 'next/link'; // Add this import
 
 // Define types for moving images
 interface MovingImage {
@@ -258,7 +260,7 @@ export default function AboutPage() {
               description="We believe in making quality education accessible to all students regardless of their background or resources."
             />
             <ValueCard
-              icon={<Flask className="h-10 w-10 text-sakec-blue" />}
+              icon={<FlaskConical className="h-10 w-10 text-sakec-blue" />} // Change Flask to FlaskConical
               title="Innovation"
               description="We continuously improve our virtual experiments to provide the most realistic and educational experience possible."
             />
@@ -273,32 +275,14 @@ export default function AboutPage() {
               description="We foster a collaborative community of educators and learners who share a passion for physics."
             />
           </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="py-16 px-4 bg-white" style={{ backgroundColor: '#efeeee' }}>
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-3xl font-bold text-center mb-12 text-sakec-blue">Our Team</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <TeamMember
-              name="Dr. Jane Smith"
-              role="Founder & Physics Professor"
-              image="/placeholder.svg?height=300&width=300"
-              description="Dr. Smith has over 20 years of experience teaching physics and developing educational technology."
-            />
-            <TeamMember
-              name="Prof. Michael Johnson"
-              role="Educational Content Director"
-              image="/placeholder.svg?height=300&width=300"
-              description="Prof. Johnson specializes in creating engaging physics curriculum and interactive learning materials."
-            />
-            <TeamMember
-              name="Sarah Williams"
-              role="Lead Software Engineer"
-              image="/placeholder.svg?height=300&width=300"
-              description="Sarah brings 15 years of experience in educational software development and simulation design."
-            />
+          <div className="text-center mt-12">
+            <Link 
+              href="/team" 
+              className="inline-flex items-center px-6 py-3 rounded-md bg-sakec-blue text-white hover:bg-sakec-blue/90 transition-colors"
+            >
+              Meet Our Team
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>

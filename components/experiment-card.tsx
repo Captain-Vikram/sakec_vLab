@@ -6,6 +6,9 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import type { Experiment } from "@/lib/data"
+import { useRouter } from "next/navigation";
+
+
 
 interface ExperimentCardProps {
   experiment: Experiment
@@ -13,6 +16,8 @@ interface ExperimentCardProps {
 
 export function ExperimentCard({ experiment }: ExperimentCardProps) {
   const [isHovered, setIsHovered] = useState(false)
+  const router = useRouter();
+
 
   const handleStartExperiment = () => {
     window.open(experiment.url, '_blank', 'noopener,noreferrer')
@@ -23,6 +28,16 @@ export function ExperimentCard({ experiment }: ExperimentCardProps) {
     Intermediate: "bg-yellow-100 text-yellow-800",
     Advanced: "bg-red-100 text-red-800",
   }
+  
+  const handleTest = (type: "pre-test" | "post-test") => {
+    const encodedTitle = encodeURIComponent(experiment.title);
+    router.push(`/test/${type}/${encodedTitle}`);
+  };
+  
+  
+  
+  
+  
 
   return (
     <Card
@@ -56,20 +71,36 @@ export function ExperimentCard({ experiment }: ExperimentCardProps) {
         <p className="text-gray-600 line-clamp-3">{experiment.description}</p>
       </CardContent>
 
-      <CardFooter className="pt-0 pb-6 flex justify-between">
-        <Button variant="outline" size="sm" className="text-blue-600 border-blue-200">
-          <BookOpen className="h-4 w-4 mr-2" />
-          Details
-        </Button>
+      <CardFooter className="pt-0 pb-6  flex gap-2 justify-between">
+        <div className="flex gap-1">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="text-purple-600 border-purple-200"
+            onClick={() => handleTest("pre-test")}
+          >
+            Pre-Test
+          </Button>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="text-green-600 border-green-200"
+            onClick={() => handleTest("post-test")}
+          >
+            Post-Test
+          </Button>
+        </div>
+
         <Button 
           size="sm" 
-          className="bg-blue-600 hover:bg-blue-700"
+          className=" bg-blue-600 hover:bg-blue-700  "
           onClick={handleStartExperiment}
         >
           Start Experiment
           <ArrowRight className="h-4 w-4 ml-2" />
         </Button>
       </CardFooter>
+
     </Card>
   )
 }
