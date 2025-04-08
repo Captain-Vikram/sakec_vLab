@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 const questionsMap: Record<string, any> = {
   "1": {
@@ -243,7 +243,10 @@ const questionsMap: Record<string, any> = {
   }
 };
 
-export async function GET(_: Request, { params }: { params: { id: string } }) {
+export async function GET(
+  request: NextRequest, 
+  { params }: { params: Record<string, string> }
+) {
   const id = params.id;
   const experiment = questionsMap[id];
 
