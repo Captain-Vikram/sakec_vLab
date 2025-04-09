@@ -8,8 +8,6 @@ import { Button } from "@/components/ui/button"
 import type { Experiment } from "@/lib/data"
 import { useRouter } from "next/navigation";
 
-
-
 interface ExperimentCardProps {
   experiment: Experiment
 }
@@ -18,9 +16,9 @@ export function ExperimentCard({ experiment }: ExperimentCardProps) {
   const [isHovered, setIsHovered] = useState(false)
   const router = useRouter();
 
-
   const handleStartExperiment = () => {
-    window.open(experiment.url, '_blank', 'noopener,noreferrer')
+    // Route to theory page instead of opening directly
+    router.push(`/experiments/${experiment.id}/theory`);
   }
 
   const difficultyColor = {
@@ -30,14 +28,8 @@ export function ExperimentCard({ experiment }: ExperimentCardProps) {
   }
   
   const handleTest = (type: "pre-test" | "post-test") => {
-    const encodedTitle = encodeURIComponent(experiment.title);
-    router.push(`/test/${type}/${encodedTitle}`);
+    router.push(`/test/${type}/${experiment.id}`);
   };
-  
-  
-  
-  
-  
 
   return (
     <Card
@@ -47,7 +39,7 @@ export function ExperimentCard({ experiment }: ExperimentCardProps) {
     >
       <div className="relative overflow-hidden h-48">
         <img
-          src={experiment.image || "/placeholder.svg"}
+          src={experiment.image || "/images/experiments/experiment-placeholder.jpg"}
           alt={experiment.title}
           className={`w-full h-full object-cover transition-transform duration-700 ${isHovered ? "scale-110" : "scale-100"}`}
         />

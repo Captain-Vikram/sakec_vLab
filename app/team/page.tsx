@@ -250,10 +250,21 @@ export default function TeamPage() {
                 <button
                   key={category.id}
                   onClick={() => {
-                    document.getElementById(category.id)?.scrollIntoView({ 
-                      behavior: 'smooth',
-                      block: 'start'
-                    });
+                    // Small delay to ensure DOM is ready
+                    setTimeout(() => {
+                      const element = document.getElementById(category.id);
+                      if (element) {
+                        // Get any fixed header height (if you have one)
+                        const headerOffset = 20; 
+                        const elementPosition = element.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                          top: offsetPosition,
+                          behavior: "smooth"
+                        });
+                      }
+                    }, 10);
                   }}
                   className={`px-5 py-3 ${bgColor} text-white rounded-md transition-all hover:scale-105 shadow-md font-medium`}
                 >
@@ -265,7 +276,7 @@ export default function TeamPage() {
           
           {/* Render each team category */}
           {groupedMembers.map((group) => (
-            <div key={group.id} className="mb-20">
+            <div key={group.id} id={group.id} className="mb-20 pt-16 -mt-16"> {/* Added id, pt-16 and -mt-16 for scroll offset */}
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
